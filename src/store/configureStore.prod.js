@@ -1,6 +1,6 @@
 import {createStore, applyMiddleware} from 'redux';
 import middleware from '../middleware';
-import rootReducer from '../reducers';
+import rootReducer from '../ducks';
 
 const configureStore = preloadedState => createStore(
     rootReducer,

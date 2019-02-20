@@ -1,6 +1,6 @@
-import {createStore, applyMiddleware, compose} from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import middleware from '../middleware';
-import rootReducer from '../reducers';
+import rootReducer from '../ducks';
 
 const configureStore = preloadedState => {
   const devToolsExtension = window.__REDUX_DEVTOOLS_EXTENSION__ || (() => {});
@@ -11,12 +11,12 @@ const configureStore = preloadedState => {
       compose(
           applyMiddleware(...middleware),
           devToolsExtension()
-      ),
+      )
   );
 
   if (module.hot) {
     // Enable Webpack hot module replacement for reducers
-    module.hot.accept('../reducers', () => {
+    module.hot.accept('../ducks', () => {
       store.replaceReducer(rootReducer);
     });
   }

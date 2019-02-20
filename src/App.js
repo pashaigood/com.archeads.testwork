@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
 import './App.css';
+import Scene from './containers/Viewport';
+import LoadButton from './containers/LoadButton'
 
 class App extends Component {
   render() {
     return (
-        <h1>Hi world!</h1>
+        <div>
+          <LoadButton/>
+          <Scene/>
+        </div>
     );
   }
 }
