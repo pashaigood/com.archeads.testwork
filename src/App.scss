@@ -15,27 +15,28 @@
     }
 
     .summaryInfo {
-      margin-Top: 48px;
+      margin-top: 48px;
 
       .heading {
         margin: 0 30px;
         height: 46px;
-        border-Bottom: solid 4px;
-        font-Size: 28px;
-        font-Weight: 700
+        border-bottom: solid 4px;
+        font-size: 28px;
+        font-weight: 700
       }
 
     }
+
     .loadModel {
       position: absolute;
       bottom: 165px;
-      text-Align: center;
+      text-align: center;
       width: 100%;
-      margin-Left: -11px
+      margin-left: -11px
     }
   }
 
   .viewport {
-    flex-Grow: 1
+    flex-grow: 1
   }
 }
