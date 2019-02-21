@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Viewport from './containers/Viewport/Viewport';
+import Viewport from './containers/Viewport';
 import LoadButton from './containers/LoadButton';
 import Classes from './App.scss';
 

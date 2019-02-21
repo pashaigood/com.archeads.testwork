@@ -1,13 +1,11 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { setZoom, toggleCamera } from '../../ducks/scene';
 import Scene from '../../components/Scene';
 import ZoomControl from '../../components/ZoomControl';
 import CameraTypeControl from '../../components/CameraTypeControl';
 import Classes from './index.scss';
 
 const Viewport = (props) => {
-  return props.path ? (
+  return (
       <div className={Classes.container}>
         <section className={Classes.zoomControl}>
           <ZoomControl
@@ -28,12 +26,7 @@ const Viewport = (props) => {
             onZoomChange={props.setZoom}
         />
       </div>
-  ) : (
-      <div className={Classes.container}/>
   );
 };
 
-export default connect(
-    state => state.scene.toObject(),
-    { setZoom, toggleCamera }
-)(Viewport);
+export default Viewport;

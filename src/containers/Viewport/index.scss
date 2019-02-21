@@ -2,8 +2,12 @@
   .container {
     height: 100%;
     position: relative;
+  }
+
+  .desk {
     background: url("../../assets/images/pattern.jpg");
   }
+
   .zoomControl {
     position: absolute;
     right: 14px;
