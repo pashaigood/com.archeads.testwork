@@ -142,7 +142,7 @@ export default class extends React.Component {
   }
 
   render() {
-    return <div ref={this.init} style={Style}/>;
+    return <div ref={this.init} className={this.props.className} style={Style}/>;
   }
 }
 

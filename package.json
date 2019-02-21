@@ -19,6 +19,7 @@
   ],
   "babel": {},
   "dependencies": {
+    "animate.css": "^3.7.0",
     "immutable": "^4.0.0-rc.12",
     "lodash": "^4.17.11",
     "memoize-one": "^5.0.0",
