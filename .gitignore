@@ -9,7 +9,6 @@
 /coverage
 
 # production
-/build
 /mocks
 
 # misc
