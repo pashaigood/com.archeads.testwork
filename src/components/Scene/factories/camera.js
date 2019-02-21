@@ -17,7 +17,7 @@ export default function({ renderer, cameraType, width, height, onChange }) {
       renderer.domElement
   );
   controls.enabled = true;
-  controls.maxDistance = camera.position.z;
+  // controls.maxDistance = camera.position.z;
   controls.minDistance = 0;
   controls.addEventListener('zoom', (event) => onChange(event.zoom));
 
@@ -48,7 +48,8 @@ function perspective({ width, height }) {
       0.1,
       1000
   );
-  camera.position.z = 210;
+  camera.position.z = 140;
+  camera.position.y = -140;
 
   return camera;
 }

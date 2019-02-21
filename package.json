@@ -2,18 +2,6 @@
   "name": "com.archeads.testwork",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
-    "immutable": "^4.0.0-rc.12",
-    "memoize-one": "^5.0.0",
-    "prop-types": "^15.7.2",
-    "react": "^16.8.2",
-    "react-dom": "^16.8.2",
-    "react-redux": "^6.0.0",
-    "react-scripts": "2.1.5",
-    "redux": "^4.0.1",
-    "three": "^0.101.1",
-    "three-collada-loader-2": "^1.0.1"
-  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -28,5 +16,29 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "babel": {
+    "plugins": [
+      "react-hot-loader/babel"
+    ]
+  },
+  "dependencies": {
+    "immutable": "^4.0.0-rc.12",
+    "memoize-one": "^5.0.0",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.2",
+    "react-dom": "^16.8.2",
+    "react-rangeslider": "^2.2.0",
+    "react-redux": "^6.0.0",
+    "react-scripts": "2.1.5",
+    "redux": "^4.0.1",
+    "reset-css": "^4.0.1",
+    "three": "^0.101.1",
+    "three-collada-loader-2": "^1.0.1",
+    "typeface-space-mono": "0.0.71"
+  },
+  "devDependencies": {
+    "node-sass": "^4.11.0",
+    "react-hot-loader": "^4.7.1"
+  }
 }

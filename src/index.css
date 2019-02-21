@@ -1,0 +1,11 @@
+@import "~reset-css";
+@import "~typeface-space-mono";
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  font-family: 'Space Mono', monospace;
+  color: #302b2f;
+}

@@ -1,0 +1,41 @@
+:local {
+  .container {
+    display: flex;
+    height: 100%;
+  }
+
+  .sidebar {
+    position: relative;
+    color: #f3f3f3;
+    width: 400px;
+    background: #302b2f;
+
+    .logo {
+      padding: 15px
+    }
+
+    .summaryInfo {
+      margin-Top: 48px;
+
+      .heading {
+        margin: 0 30px;
+        height: 46px;
+        border-Bottom: solid 4px;
+        font-Size: 28px;
+        font-Weight: 700
+      }
+
+    }
+    .loadModel {
+      position: absolute;
+      bottom: 165px;
+      text-Align: center;
+      width: 100%;
+      margin-Left: -11px
+    }
+  }
+
+  .viewport {
+    flex-Grow: 1
+  }
+}

@@ -8,7 +8,8 @@ import cameraFactory from './factories/camera';
 
 const Style = {
   width: '100%',
-  height: 900
+  height: '100%',
+  overflow: 'hidden'
 };
 
 export default class extends React.Component {
@@ -49,13 +50,12 @@ export default class extends React.Component {
       return;
     }
 
+    const { offsetWidth: width, offsetHeight: height } = this.container;
+
     if (this.camera) {
       this.camera.controls.dispose();
       this.scene.remove(this.camera);
     }
-
-    const dom = document.getElementById('three');
-    const { offsetWidth: width, offsetHeight: height } = dom;
 
     this.camera = cameraFactory({
       renderer: this.scene.renderer,
@@ -66,15 +66,18 @@ export default class extends React.Component {
     });
   });
 
-  componentDidMount() {
-    this.createScene();
-    this.createLight();
-    this.update(this.props);
-  }
+  init = (container) => {
+    this.container = container;
+    setTimeout(() => {
+      this.createScene();
+      this.setupLight();
+      this.setupScene();
+      this.update(this.props);
+    }, 0);
+  };
 
   createScene() {
-    const dom = document.getElementById('three');
-    const { offsetWidth: width, offsetHeight: height } = dom;
+    const { offsetWidth: width, offsetHeight: height } = this.container;
 
     this.scene = sceneFactory({
       width,
@@ -90,10 +93,10 @@ export default class extends React.Component {
     };
 
     animate();
-    dom.appendChild(this.scene.renderer.domElement);
+    this.container.appendChild(this.scene.renderer.domElement);
   }
 
-  createLight() {
+  setupLight() {
     const { scene } = this;
 
     const ambientLight = new THREE.AmbientLight(0xcccccc, 0.4);
@@ -112,18 +115,35 @@ export default class extends React.Component {
     scene.add(directionalLight);
   }
 
+  setupScene() {
+    const width = 1000;
+    const geometry = new THREE.PlaneGeometry(width, width);
+    const texture = new THREE.TextureLoader().load(
+        require('../../assets/images/pattern.jpg'));
+    texture.wrapS = THREE.RepeatWrapping;
+    texture.wrapT = THREE.RepeatWrapping;
+    const size = 1000 / 150 * 7;
+    texture.repeat.set(size, size);
+    const material = new THREE.MeshBasicMaterial({ map: texture });
+
+    var plane = new THREE.Mesh(geometry, material);
+    this.scene.add(plane);
+  }
+
   shouldComponentUpdate(props) {
     this.update(props);
     return false;
   }
 
-  update (props) {
+  update(props) {
     this.openScene(props.src);
     this.setCamera(props.cameraType);
     this.changeZoom(props.zoom, props.cameraType);
   }
 
   render() {
-    return <div style={Style} id="three"/>;
+    return <div ref={this.init} style={Style}/>;
   }
 }
+
+

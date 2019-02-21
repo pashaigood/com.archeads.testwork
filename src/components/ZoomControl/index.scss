@@ -1,0 +1,41 @@
+:local {
+  .container {
+    background: #fff;
+    width: 50px;
+    overflow: hidden;
+  }
+
+  .percentage {
+    margin-top: 15px;
+    text-align: center;
+    font-size: 13px
+  }
+
+  .slider {
+    margin-top: 12px;
+    text-align: center;
+
+    .zoomButton {
+      border: none;
+      cursor: pointer;
+      width: 32px;
+      height: 32px;
+      margin: 12px auto;
+      padding: 0;
+      outline: none;
+      background: 50% 50% no-repeat;
+
+      &In {
+        background-image: url("./images/zoom-in.jpg");
+      }
+
+      &Out {
+        background-image: url("./images/zoom-out.jpg");
+      }
+    }
+
+    :global {
+      @import "rangeSlider";
+    }
+  }
+}

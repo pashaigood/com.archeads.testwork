@@ -1,0 +1,17 @@
+:local {
+  .container {
+    height: 100%;
+    position: relative;
+    background: url("../../assets/images/pattern.jpg");
+  }
+  .zoomControl {
+    position: absolute;
+    right: 14px;
+    top: 135px
+  }
+  .cameraTypeControl {
+    position: absolute;
+    right: 14px;
+    bottom: 14px;
+  }
+}
