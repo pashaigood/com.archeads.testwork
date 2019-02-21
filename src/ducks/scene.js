@@ -23,7 +23,7 @@ export default (state = defaultState, action) => {
     case Types.READ:
       return state.set('path', action.path);
     case Types.ZOOM:
-      return state.set('zoom', state.get('zoom') + action.factor);
+      return state.set('zoom', Math.min(Math.max(action.zoom, 0), 10));
     case Types.UPDATE:
       return state.merge(action.payload);
     case Types.CAMERA_TOGGLE:
@@ -51,9 +51,10 @@ export function update(payload) {
 }
 
 export function setZoom(zoom) {
-  return update({
+  return {
+    type: Types.ZOOM,
     zoom
-  });
+  }
 }
 
 export function toggleCamera() {

@@ -9,7 +9,7 @@ class App extends Component {
         <div className={Classes.container}>
           <aside className={Classes.sidebar}>
             <section className={Classes.logo}>
-              <a href="#">
+              <a href="/">
                 <img
                     src={require('./assets/images/logo.png')}
                     width={176}

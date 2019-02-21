@@ -45,7 +45,7 @@ export default class extends React.Component {
     this.camera.controls.update();
   });
 
-  setCamera = memoize((cameraType) => {
+  changeCamera = memoize((cameraType) => {
     if (!this.scene) {
       return;
     }
@@ -116,14 +116,14 @@ export default class extends React.Component {
   }
 
   setupScene() {
-    const width = 1000;
-    const geometry = new THREE.PlaneGeometry(width, width);
-    const texture = new THREE.TextureLoader().load(
-        require('../../assets/images/pattern.jpg'));
+    const size = 2000;
+    const textureSize = 128;
+    const geometry = new THREE.PlaneGeometry(size, size);
+    const resizeFactor = size / textureSize * 7;
+    const texture = new THREE.TextureLoader().load(require('../../assets/images/pattern.jpg'));
     texture.wrapS = THREE.RepeatWrapping;
     texture.wrapT = THREE.RepeatWrapping;
-    const size = 1000 / 150 * 7;
-    texture.repeat.set(size, size);
+    texture.repeat.set(resizeFactor, resizeFactor);
     const material = new THREE.MeshBasicMaterial({ map: texture });
 
     var plane = new THREE.Mesh(geometry, material);
@@ -137,7 +137,7 @@ export default class extends React.Component {
 
   update(props) {
     this.openScene(props.src);
-    this.setCamera(props.cameraType);
+    this.changeCamera(props.cameraType);
     this.changeZoom(props.zoom, props.cameraType);
   }
 

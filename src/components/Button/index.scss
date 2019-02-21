@@ -1,4 +1,4 @@
-$color: #ed212a;
+$color: #00bac7;
 $perspectiveColor: #939393;
 
 :local {
@@ -7,7 +7,7 @@ $perspectiveColor: #939393;
     $size: 42px;
     $border: solid 2px #fff;
     font-family: 'Space Mono', monospace;
-    background: #00bac7;
+    background: $color;
     color: #fff;
     height: $height;
     text-align: center;
@@ -21,8 +21,9 @@ $perspectiveColor: #939393;
     font-size: 18px;
     font-weight: 700;
     border: $border;
-
     cursor: pointer;
+
+    transition: 200ms ease-in;
 
      &:before {
        content: '';
@@ -47,6 +48,11 @@ $perspectiveColor: #939393;
        background: $perspectiveColor;
        border: $border;
      }
+
+    &:hover {
+      transition: none;
+      background: darken($color, 5%);
+    }
   }
 
   .content {

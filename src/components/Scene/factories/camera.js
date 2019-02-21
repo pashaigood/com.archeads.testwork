@@ -1,26 +1,21 @@
 import * as THREE from 'three';
 import OrbitControls from '../classes/OrbitControls';
 import CameraTypes from '../../../constants/CameraTypes';
+import _throttle from 'lodash/throttle'
 
 export default function({ renderer, cameraType, width, height, onChange }) {
   let camera;
-
   if (cameraType === CameraTypes.PERSPECTIVE) {
     camera = perspective({ width, height });
   } else {
     camera = orthographic({ width, height });
   }
 
-
   const controls = new OrbitControls(
       camera,
       renderer.domElement
   );
-  controls.enabled = true;
-  // controls.maxDistance = camera.position.z;
-  controls.minDistance = 0;
-  controls.addEventListener('zoom', (event) => onChange(event.zoom));
-
+  controls.addEventListener('zoom', _throttle((event) => onChange(event.zoom), 100));
   camera.controls = controls;
 
   return camera;
@@ -34,7 +29,7 @@ function orthographic({ width, height }) {
       height / factor,
       height / -factor,
       0.1,
-      1000
+      2000
   );
 
   camera.position.z = 210;
@@ -46,7 +41,7 @@ function perspective({ width, height }) {
       35,
       width / height,
       0.1,
-      1000
+      2000
   );
   camera.position.z = 140;
   camera.position.y = -140;

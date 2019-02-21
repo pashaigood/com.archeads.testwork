@@ -207,7 +207,10 @@ class OrbitControls extends EventDispatcher {
             console.warn('WARNING: OrbitControls.js encountered an unknown camera type - dolly/zoom disabled.');
           }
 
-          scope.dispatchEvent({ ...zoomEvent, zoom });
+          if (dispatchZoomEvent) {
+            scope.dispatchEvent({ ...zoomEvent, zoom });
+          }
+          dispatchZoomEvent = true
 
           lastPosition.copy(scope.object.position);
           lastQuaternion.copy(scope.object.quaternion);
@@ -241,12 +244,10 @@ class OrbitControls extends EventDispatcher {
       if (Object.getPrototypeOf(scope.object).isPerspectiveCamera) {
         scale = (this.radius0 / factor) / spherical.radius;
       } else if (Object.getPrototypeOf(scope.object).isOrthographicCamera) {
-        console.log(factor);
         scope.object.zoom = Math.max(
             scope.minZoom,
             Math.min(scope.maxZoom, factor)
         );
-        console.log(scope.object.zoom);
         scope.object.updateProjectionMatrix();
         zoomChanged = true;
       } else {
@@ -255,6 +256,7 @@ class OrbitControls extends EventDispatcher {
         scope.enableZoom = false;
       }
 
+      dispatchZoomEvent = false;
       this.update();
     };
 
@@ -298,6 +300,7 @@ class OrbitControls extends EventDispatcher {
     var scale = 1;
     var panOffset = new Vector3();
     var zoomChanged = false;
+    var dispatchZoomEvent = true;
 
     var rotateStart = new Vector2();
     var rotateEnd = new Vector2();
@@ -509,6 +512,7 @@ class OrbitControls extends EventDispatcher {
     function handleKeyDown(event) {
       // console.log( 'handleKeyDown' );
 
+      // eslint-disable-next-line
       switch (event.keyCode) {
         case scope.keys.UP:
           pan(0, scope.keyPanSpeed);

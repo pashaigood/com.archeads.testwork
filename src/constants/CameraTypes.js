@@ -1,4 +1,4 @@
 export default {
-  PERSPECTIVE: 'P',
-  ORTHOGRAPHIC: 'O'
+  PERSPECTIVE: 0,
+  ORTHOGRAPHIC: 1
 };
