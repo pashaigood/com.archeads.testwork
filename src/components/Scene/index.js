@@ -120,7 +120,8 @@ export default class extends React.Component {
     const textureSize = 128;
     const geometry = new THREE.PlaneGeometry(size, size);
     const resizeFactor = size / textureSize * 7;
-    const texture = new THREE.TextureLoader().load(require('../../assets/images/pattern.jpg'));
+    const texture = new THREE.TextureLoader().load(
+      require('../../assets/images/pattern.jpg'));
     texture.wrapS = THREE.RepeatWrapping;
     texture.wrapT = THREE.RepeatWrapping;
     texture.repeat.set(resizeFactor, resizeFactor);

@@ -7,19 +7,19 @@ const ZazyViewPort = React.lazy(() => import('./Viewport'));
 const Placeholder = <div className={`${Classes.container} ${Classes.desk}`}/>;
 
 const Viewport = (props) => (
-    props.path ? (
-        <Suspense
-            fallback={Placeholder}
-        >
-          <ZazyViewPort {...props} />
-        </Suspense>
+  props.path ? (
+    <Suspense
+      fallback={Placeholder}
+    >
+      <ZazyViewPort {...props} />
+    </Suspense>
 
-    ) : (
-        Placeholder
-    )
+  ) : (
+    Placeholder
+  )
 );
 
 export default connect(
-    state => state.scene.toObject(),
-    { setZoom, toggleCamera }
+  state => state.scene.toObject(),
+  { setZoom, toggleCamera }
 )(Viewport);

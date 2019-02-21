@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import OrbitControls from '../classes/OrbitControls';
 import CameraTypes from '../../../constants/CameraTypes';
-import _throttle from 'lodash/throttle'
+import _throttle from 'lodash/throttle';
 
 export default function({ renderer, cameraType, width, height, onChange }) {
   let camera;
@@ -12,10 +12,11 @@ export default function({ renderer, cameraType, width, height, onChange }) {
   }
 
   const controls = new OrbitControls(
-      camera,
-      renderer.domElement
+    camera,
+    renderer.domElement
   );
-  controls.addEventListener('zoom', _throttle((event) => onChange(event.zoom), 100));
+  controls.addEventListener('zoom',
+    _throttle((event) => onChange(event.zoom), 100));
   camera.controls = controls;
 
   return camera;
@@ -24,12 +25,12 @@ export default function({ renderer, cameraType, width, height, onChange }) {
 function orthographic({ width, height }) {
   const factor = 15;
   const camera = new THREE.OrthographicCamera(
-      width / -factor,
-      width / factor,
-      height / factor,
-      height / -factor,
-      0.1,
-      2000
+    width / -factor,
+    width / factor,
+    height / factor,
+    height / -factor,
+    0.1,
+    2000
   );
 
   camera.position.z = 210;
@@ -38,10 +39,10 @@ function orthographic({ width, height }) {
 
 function perspective({ width, height }) {
   const camera = new THREE.PerspectiveCamera(
-      35,
-      width / height,
-      0.1,
-      2000
+    35,
+    width / height,
+    0.1,
+    2000
   );
   camera.position.z = 140;
   camera.position.y = -140;

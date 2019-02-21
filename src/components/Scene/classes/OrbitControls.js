@@ -94,7 +94,6 @@ class OrbitControls extends EventDispatcher {
     this.zoom0 = this.object.zoom;
     this.radius0 = null;
 
-
     //
     // public methods
     //
@@ -122,8 +121,8 @@ class OrbitControls extends EventDispatcher {
 
       // so camera.up is the orbit axis
       var quat = new Quaternion().setFromUnitVectors(
-          object.up,
-          new Vector3(0, 1, 0)
+        object.up,
+        new Vector3(0, 1, 0)
       );
       var quatInverse = quat.clone().inverse();
 
@@ -150,11 +149,11 @@ class OrbitControls extends EventDispatcher {
 
         // restrict theta to be between desired limits
         spherical.theta = Math.max(scope.minAzimuthAngle,
-            Math.min(scope.maxAzimuthAngle, spherical.theta));
+          Math.min(scope.maxAzimuthAngle, spherical.theta));
 
         // restrict phi to be between desired limits
         spherical.phi = Math.max(scope.minPolarAngle,
-            Math.min(scope.maxPolarAngle, spherical.phi));
+          Math.min(scope.maxPolarAngle, spherical.phi));
 
         spherical.makeSafe();
 
@@ -163,8 +162,8 @@ class OrbitControls extends EventDispatcher {
 
         // restrict radius to be between desired limits
         spherical.radius = Math.max(
-            scope.minDistance,
-            Math.min(scope.maxDistance, spherical.radius)
+          scope.minDistance,
+          Math.min(scope.maxDistance, spherical.radius)
         );
 
         // move target to panned location
@@ -194,8 +193,8 @@ class OrbitControls extends EventDispatcher {
         // using small-angle approximation cos(x/2) = 1 - x^2 / 8
 
         if (zoomChanged ||
-            lastPosition.distanceToSquared(scope.object.position) > EPS ||
-            8 * (1 - lastQuaternion.dot(scope.object.quaternion)) > EPS) {
+          lastPosition.distanceToSquared(scope.object.position) > EPS ||
+          8 * (1 - lastQuaternion.dot(scope.object.quaternion)) > EPS) {
           scope.dispatchEvent(changeEvent);
 
           let zoom;
@@ -204,13 +203,14 @@ class OrbitControls extends EventDispatcher {
           } else if (Object.getPrototypeOf(scope.object).isOrthographicCamera) {
             zoom = scope.object.zoom;
           } else {
-            console.warn('WARNING: OrbitControls.js encountered an unknown camera type - dolly/zoom disabled.');
+            console.warn(
+              'WARNING: OrbitControls.js encountered an unknown camera type - dolly/zoom disabled.');
           }
 
           if (dispatchZoomEvent) {
             scope.dispatchEvent({ ...zoomEvent, zoom });
           }
-          dispatchZoomEvent = true
+          dispatchZoomEvent = true;
 
           lastPosition.copy(scope.object.position);
           lastQuaternion.copy(scope.object.quaternion);
@@ -245,14 +245,14 @@ class OrbitControls extends EventDispatcher {
         scale = (this.radius0 / factor) / spherical.radius;
       } else if (Object.getPrototypeOf(scope.object).isOrthographicCamera) {
         scope.object.zoom = Math.max(
-            scope.minZoom,
-            Math.min(scope.maxZoom, factor)
+          scope.minZoom,
+          Math.min(scope.maxZoom, factor)
         );
         scope.object.updateProjectionMatrix();
         zoomChanged = true;
       } else {
         console.warn(
-            'WARNING: OrbitControls.js encountered an unknown camera type - dolly/zoom disabled.');
+          'WARNING: OrbitControls.js encountered an unknown camera type - dolly/zoom disabled.');
         scope.enableZoom = false;
       }
 
@@ -358,8 +358,8 @@ class OrbitControls extends EventDispatcher {
 
       return function pan(deltaX, deltaY) {
         var element = scope.domElement === document
-            ? scope.domElement.body
-            : scope.domElement;
+          ? scope.domElement.body
+          : scope.domElement;
 
         if (Object.getPrototypeOf(scope.object).isPerspectiveCamera) {
           // perspective
@@ -372,19 +372,19 @@ class OrbitControls extends EventDispatcher {
 
           // we actually don't use screenWidth, since perspective camera is fixed to screen height
           panLeft(2 * deltaX * targetDistance / element.clientHeight,
-              scope.object.matrix);
+            scope.object.matrix);
           panUp(2 * deltaY * targetDistance / element.clientHeight,
-              scope.object.matrix);
+            scope.object.matrix);
         } else if (Object.getPrototypeOf(scope.object).isOrthographicCamera) {
           // orthographic
           panLeft(deltaX * (scope.object.right - scope.object.left) /
-              scope.object.zoom / element.clientWidth, scope.object.matrix);
+            scope.object.zoom / element.clientWidth, scope.object.matrix);
           panUp(deltaY * (scope.object.top - scope.object.bottom) /
-              scope.object.zoom / element.clientHeight, scope.object.matrix);
+            scope.object.zoom / element.clientHeight, scope.object.matrix);
         } else {
           // camera neither orthographic nor perspective
           console.warn(
-              'WARNING: OrbitControls.js encountered an unknown camera type - pan disabled.');
+            'WARNING: OrbitControls.js encountered an unknown camera type - pan disabled.');
           scope.enablePan = false;
         }
       };
@@ -395,12 +395,12 @@ class OrbitControls extends EventDispatcher {
         scale /= dollyScale;
       } else if (Object.getPrototypeOf(scope.object).isOrthographicCamera) {
         scope.object.zoom = Math.max(scope.minZoom,
-            Math.min(scope.maxZoom, scope.object.zoom * dollyScale));
+          Math.min(scope.maxZoom, scope.object.zoom * dollyScale));
         scope.object.updateProjectionMatrix();
         zoomChanged = true;
       } else {
         console.warn(
-            'WARNING: OrbitControls.js encountered an unknown camera type - dolly/zoom disabled.');
+          'WARNING: OrbitControls.js encountered an unknown camera type - dolly/zoom disabled.');
         scope.enableZoom = false;
       }
     }
@@ -410,12 +410,12 @@ class OrbitControls extends EventDispatcher {
         scale *= dollyScale;
       } else if (Object.getPrototypeOf(scope.object).isOrthographicCamera) {
         scope.object.zoom = Math.max(scope.minZoom,
-            Math.min(scope.maxZoom, scope.object.zoom / dollyScale));
+          Math.min(scope.maxZoom, scope.object.zoom / dollyScale));
         scope.object.updateProjectionMatrix();
         zoomChanged = true;
       } else {
         console.warn(
-            'WARNING: OrbitControls.js encountered an unknown camera type - dolly/zoom disabled.');
+          'WARNING: OrbitControls.js encountered an unknown camera type - dolly/zoom disabled.');
         scope.enableZoom = false;
       }
     }
@@ -449,16 +449,16 @@ class OrbitControls extends EventDispatcher {
       rotateDelta.subVectors(rotateEnd, rotateStart);
 
       var element = scope.domElement === document
-          ? scope.domElement.body
-          : scope.domElement;
+        ? scope.domElement.body
+        : scope.domElement;
 
       // rotating across whole screen goes 360 degrees around
       rotateLeft(2 * Math.PI * rotateDelta.x / element.clientWidth *
-          scope.rotateSpeed);
+        scope.rotateSpeed);
 
       // rotating up and down along whole screen attempts to go 360, but limited to 180
       rotateUp(2 * Math.PI * rotateDelta.y / element.clientHeight *
-          scope.rotateSpeed);
+        scope.rotateSpeed);
 
       rotateStart.copy(rotateEnd);
 
@@ -566,16 +566,16 @@ class OrbitControls extends EventDispatcher {
       rotateDelta.subVectors(rotateEnd, rotateStart);
 
       var element = scope.domElement === document
-          ? scope.domElement.body
-          : scope.domElement;
+        ? scope.domElement.body
+        : scope.domElement;
 
       // rotating across whole screen goes 360 degrees around
       rotateLeft(2 * Math.PI * rotateDelta.x / element.clientWidth *
-          scope.rotateSpeed);
+        scope.rotateSpeed);
 
       // rotating up and down along whole screen attempts to go 360, but limited to 180
       rotateUp(2 * Math.PI * rotateDelta.y / element.clientHeight *
-          scope.rotateSpeed);
+        scope.rotateSpeed);
 
       rotateStart.copy(rotateEnd);
 
@@ -689,7 +689,7 @@ class OrbitControls extends EventDispatcher {
 
     function onMouseWheel(event) {
       if (scope.enabled === false || scope.enableZoom === false ||
-          (state !== STATE.NONE && state !== STATE.ROTATE)) return;
+        (state !== STATE.NONE && state !== STATE.ROTATE)) return;
 
       event.preventDefault();
       event.stopPropagation();
@@ -702,7 +702,7 @@ class OrbitControls extends EventDispatcher {
 
     function onKeyDown(event) {
       if (scope.enabled === false || scope.enableKeys === false ||
-          scope.enablePan === false) return;
+        scope.enablePan === false) return;
 
       handleKeyDown(event);
     }
@@ -830,73 +830,73 @@ class OrbitControls extends EventDispatcher {
 
   get noZoom() {
     console.warn(
-        'OrbitControls: .noZoom has been deprecated. Use .enableZoom instead.');
+      'OrbitControls: .noZoom has been deprecated. Use .enableZoom instead.');
     return !this.enableZoom;
   }
 
   set noZoom(value) {
     console.warn(
-        'OrbitControls: .noZoom has been deprecated. Use .enableZoom instead.');
+      'OrbitControls: .noZoom has been deprecated. Use .enableZoom instead.');
     this.enableZoom = !value;
   }
 
   get noRotate() {
     console.warn(
-        'OrbitControls: .noRotate has been deprecated. Use .enableRotate instead.');
+      'OrbitControls: .noRotate has been deprecated. Use .enableRotate instead.');
     return !this.enableRotate;
   }
 
   set noRotate(value) {
     console.warn(
-        'OrbitControls: .noRotate has been deprecated. Use .enableRotate instead.');
+      'OrbitControls: .noRotate has been deprecated. Use .enableRotate instead.');
     this.enableRotate = !value;
   }
 
   get noPan() {
     console.warn(
-        'OrbitControls: .noPan has been deprecated. Use .enablePan instead.');
+      'OrbitControls: .noPan has been deprecated. Use .enablePan instead.');
     return !this.enablePan;
   }
 
   set noPan(value) {
     console.warn(
-        'OrbitControls: .noPan has been deprecated. Use .enablePan instead.');
+      'OrbitControls: .noPan has been deprecated. Use .enablePan instead.');
     this.enablePan = !value;
   }
 
   get noKeys() {
     console.warn(
-        'OrbitControls: .noKeys has been deprecated. Use .enableKeys instead.');
+      'OrbitControls: .noKeys has been deprecated. Use .enableKeys instead.');
     return !this.enableKeys;
   }
 
   set noKeys(value) {
     console.warn(
-        'OrbitControls: .noKeys has been deprecated. Use .enableKeys instead.');
+      'OrbitControls: .noKeys has been deprecated. Use .enableKeys instead.');
     this.enableKeys = !value;
   }
 
   get staticMoving() {
     console.warn(
-        'OrbitControls: .staticMoving has been deprecated. Use .enableDamping instead.');
+      'OrbitControls: .staticMoving has been deprecated. Use .enableDamping instead.');
     return !this.enableDamping;
   }
 
   set staticMoving(value) {
     console.warn(
-        'OrbitControls: .staticMoving has been deprecated. Use .enableDamping instead.');
+      'OrbitControls: .staticMoving has been deprecated. Use .enableDamping instead.');
     this.enableDamping = !value;
   }
 
   get dynamicDampingFactor() {
     console.warn(
-        'OrbitControls: .dynamicDampingFactor has been renamed. Use .dampingFactor instead.');
+      'OrbitControls: .dynamicDampingFactor has been renamed. Use .dampingFactor instead.');
     return this.dampingFactor;
   }
 
   set dynamicDampingFactor(value) {
     console.warn(
-        'OrbitControls: .dynamicDampingFactor has been renamed. Use .dampingFactor instead.');
+      'OrbitControls: .dynamicDampingFactor has been renamed. Use .dampingFactor instead.');
     this.dampingFactor = value;
   }
 }

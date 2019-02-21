@@ -3,7 +3,7 @@ import CameraTypes from '../constants/CameraTypes';
 
 const createName = name => `SCENE/${name}`;
 
-export const Types = {
+const Types = {
   CREATE: createName('CREATE'),
   READ: createName('READ'),
   UPDATE: createName('UPDATE'),
@@ -28,8 +28,8 @@ export default (state = defaultState, action) => {
       return state.merge(action.payload);
     case Types.CAMERA_TOGGLE:
       const cameraType = CameraTypes.PERSPECTIVE === state.get('cameraType')
-          ? CameraTypes.ORTHOGRAPHIC
-          : CameraTypes.PERSPECTIVE;
+        ? CameraTypes.ORTHOGRAPHIC
+        : CameraTypes.PERSPECTIVE;
       return state.set('cameraType', cameraType);
     default:
       return state;
@@ -54,11 +54,11 @@ export function setZoom(zoom) {
   return {
     type: Types.ZOOM,
     zoom
-  }
+  };
 }
 
 export function toggleCamera() {
   return {
     type: Types.CAMERA_TOGGLE
-  }
+  };
 }
